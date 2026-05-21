@@ -27,7 +27,32 @@ namespace Academy
 				"Students,Groups,Directions",
 				"[group]=group_id AND direction=direction_id"
 				);
-			toolStripStatusLabel.Text = $"Количество записей: {dgvStudents.RowCount - 1}";
+            dgvGroups.DataSource = connector.Load
+                (
+                "group_id,group_name,direction_name,start_date,start_time,learning_days",
+                "Groups,Directions,Students",
+                "[group]=group_id AND direction=direction_id" +
+                " GROUP BY group_id,group_name,direction_name,start_date,start_time,learning_days"
+                );
+            dgvDirections.DataSource = connector.Load
+                (
+                "direction_id,direction_name",
+                "Directions",
+                ""
+                );
+            dgvDisciplines.DataSource = connector.Load
+                (
+                "discipline_id,discipline_name,number_of_lessons",
+                "Disciplines",
+                ""
+                );
+            dgvTeacher.DataSource = connector.Load
+                (
+                "teacher_id,last_name,first_name,middle_name,birth_date,email,phone,photo,work_since,rate",
+                "Teachers",
+                ""
+                );
+            toolStripStatusLabel.Text = $"Количество записей: {dgvStudents.RowCount - 1}";
         }
     }
 }
