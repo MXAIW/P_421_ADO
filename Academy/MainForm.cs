@@ -101,6 +101,7 @@ namespace Academy
             //Console.WriteLine($"SelectedItem:{cbGroupsDirection.SelectedItem}");
             //Console.WriteLine($"SelectedText:{cbGroupsDirection.SelectedText}");
             //Console.WriteLine($"SelectedValue:{cbGroupsDirection.SelectedValue}");
+            toolStripStatusLabel.Text = $"Количество записей: {tables[1].RowCount - 1}";
         }
 
         private void cbStudentsGroup_SelectionChangeCommitted(object sender, EventArgs e)
@@ -113,6 +114,7 @@ namespace Academy
 					queries[0].ToString() +
 					(cbStudentsGroup.SelectedIndex == 0 ? "" : $" AND [group]={cbStudentsGroup.SelectedValue}")
 				);
+			toolStripStatusLabel.Text = $"Количество записей: {tables[0].RowCount - 1}";
         }
 
 		private void cbStudentsDiwection_SelectionChangeCommitted(object sender, EventArgs e)
@@ -123,11 +125,12 @@ namespace Academy
 				(cbStudentsDiwection.SelectedIndex == 0 ? "" : $" AND direction={cbStudentsDiwection.SelectedValue}")
 			);
 			LoadComboBoxFromBase
-				(
-					cbStudentsGroup, 
-					"Groups", 
-					(cbStudentsDiwection.SelectedIndex == 0 ? "" : $" direction={cbStudentsDiwection.SelectedValue}")
-				);
+			(
+				cbStudentsGroup, 
+				"Groups", 
+				(cbStudentsDiwection.SelectedIndex == 0 ? "" : $" direction={cbStudentsDiwection.SelectedValue}")
+			);
+            toolStripStatusLabel.Text = $"Количество записей: {tables[0].RowCount - 1}";
         }
     }
 }
