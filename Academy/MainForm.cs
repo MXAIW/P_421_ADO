@@ -62,10 +62,13 @@ namespace Academy
         }
 		[DllImport("kernel32.dll")]
 		public static extern bool AllocConsole();
-		void LoadComboBoxFromBase(ComboBox comboBox, string table)
+		void LoadComboBoxFromBase(ComboBox comboBox, string table, string condition = "")
         {
             string column = table.Substring(0, table.Length - 1).ToLower();
-            DataTable dt = connector.Load($"SELECT {column}_id,{column}_name FROM {table}");
+			string cmd = $"SELECT {column}_id,{column}_name FROM {table}";
+			if (condition != "")
+				cmd += $" WHERE {condition}";
+            DataTable dt = connector.Load(cmd);
             DataRow rowDefault = dt.NewRow();
             rowDefault[0] = 0;
             rowDefault[1] = "Все";
@@ -102,20 +105,29 @@ namespace Academy
 
         private void cbStudentsGroup_SelectionChangeCommitted(object sender, EventArgs e)
         {
-			tables[0].DataSource = connector.Load
-			(
-				queries[0].ToString() +
-				(cbStudentsGroup.SelectedIndex == 0 ? "" : $" AND [group]={cbStudentsGroup.SelectedValue}")
-			);
+			if (cbStudentsGroup.SelectedIndex == 0)
+				cbStudentsDiwection_SelectionChangeCommitted(cbStudentsDiwection, null);
+			else
+				tables[0].DataSource = connector.Load
+				(
+					queries[0].ToString() +
+					(cbStudentsGroup.SelectedIndex == 0 ? "" : $" AND [group]={cbStudentsGroup.SelectedValue}")
+				);
         }
 
-        private void cbStudentsDiwection_SelectionChangeCommitted(object sender, EventArgs e)
-        {
+		private void cbStudentsDiwection_SelectionChangeCommitted(object sender, EventArgs e)
+		{
 			tables[0].DataSource = connector.Load
 			(
 				queries[0] +
-				(cbStudentsDiwection.SelectedIndex == 0 ? "" : $" AND [group]={cbStudentsDiwection.SelectedValue}")
+				(cbStudentsDiwection.SelectedIndex == 0 ? "" : $" AND direction={cbStudentsDiwection.SelectedValue}")
 			);
+			LoadComboBoxFromBase
+				(
+					cbStudentsGroup, 
+					"Groups", 
+					(cbStudentsDiwection.SelectedIndex == 0 ? "" : $" direction={cbStudentsDiwection.SelectedValue}")
+				);
         }
     }
 }
