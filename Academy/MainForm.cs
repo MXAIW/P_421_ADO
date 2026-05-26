@@ -12,6 +12,11 @@ using System.Runtime.InteropServices;
 using System.Configuration;
 using DBtools;
 
+// дЛя добавления писать так: Фамилия Имя Очество Дата рождения группа
+// Пишать без запятых, разделяя значения пробелами. Если очество или группа отсуствует, то напишите "-". 
+//Пример: Иванович Иван Иванов 01.01.1999 П_421
+//НАЛИЧИЕ ОШИБОК НЕ ПРОВЕРЯЕТ! я не успел
+
 namespace Academy
 {
 	public partial class MainForm : Form
