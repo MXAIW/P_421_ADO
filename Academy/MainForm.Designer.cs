@@ -45,6 +45,7 @@
             this.dgvDisciplines = new System.Windows.Forms.DataGridView();
             this.tabPageTeachers = new System.Windows.Forms.TabPage();
             this.dgvTeachers = new System.Windows.Forms.DataGridView();
+            this.btnAddStudents = new System.Windows.Forms.Button();
             this.statusStrip.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabPageStudents.SuspendLayout();
@@ -92,6 +93,7 @@
             // 
             // tabPageStudents
             // 
+            this.tabPageStudents.Controls.Add(this.btnAddStudents);
             this.tabPageStudents.Controls.Add(this.cbStudentsDiwection);
             this.tabPageStudents.Controls.Add(this.cbStudentsGroup);
             this.tabPageStudents.Controls.Add(this.dgvStudents);
@@ -132,7 +134,7 @@
             this.dgvStudents.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvStudents.Location = new System.Drawing.Point(0, 34);
             this.dgvStudents.Name = "dgvStudents";
-            this.dgvStudents.Size = new System.Drawing.Size(738, 319);
+            this.dgvStudents.Size = new System.Drawing.Size(732, 319);
             this.dgvStudents.TabIndex = 0;
             // 
             // tabPageGroups
@@ -238,6 +240,17 @@
             this.dgvTeachers.Size = new System.Drawing.Size(738, 319);
             this.dgvTeachers.TabIndex = 0;
             // 
+            // btnAddStudents
+            // 
+            this.btnAddStudents.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddStudents.Location = new System.Drawing.Point(657, 7);
+            this.btnAddStudents.Name = "btnAddStudents";
+            this.btnAddStudents.Size = new System.Drawing.Size(75, 23);
+            this.btnAddStudents.TabIndex = 3;
+            this.btnAddStudents.Text = "Добавить";
+            this.btnAddStudents.UseVisualStyleBackColor = true;
+            this.btnAddStudents.Click += new System.EventHandler(this.btnAddStudents_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -284,6 +297,7 @@
         private System.Windows.Forms.ComboBox cbGroupsDirection;
         private System.Windows.Forms.ComboBox cbStudentsDiwection;
         private System.Windows.Forms.ComboBox cbStudentsGroup;
+        private System.Windows.Forms.Button btnAddStudents;
     }
 }
 

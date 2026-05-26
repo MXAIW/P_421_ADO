@@ -132,5 +132,11 @@ namespace Academy
 			);
             toolStripStatusLabel.Text = $"Количество записей: {tables[0].RowCount - 1}";
         }
+
+        private void btnAddStudents_Click(object sender, EventArgs e)
+        {
+			HumanForm humanForm = new HumanForm();
+			humanForm.ShowDialog();
+        }
     }
 }
