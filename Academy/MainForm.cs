@@ -34,7 +34,7 @@ namespace Academy
 			),
 			new Query("*", "Directions"),
             new Query("*", "Disciplines"),
-            new Query("*", "Teacher"),
+            new Query("*", "Teachers"),
         };
 		public MainForm()
 		{
@@ -56,9 +56,6 @@ namespace Academy
 			/////////////////////////////
 
 			//cbGroupsDirection.SelectedIndex = 0;
-			LoadComboBoxFromBase(cbGroupsDirection, "Directions");
-			LoadComboBoxFromBase(cbStudentsGroup, "Groups");
-            LoadComboBoxFromBase(cbStudentsDiwection, "Directions");
         }
 		[DllImport("kernel32.dll")]
 		public static extern bool AllocConsole();
@@ -76,6 +73,7 @@ namespace Academy
             comboBox.DataSource = dt;
             comboBox.DisplayMember = $"{column}_name";
             comboBox.ValueMember = $"{column}_id";
+			comboBox.SelectedIndex = 0;
         }
 
 		private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
@@ -87,6 +85,9 @@ namespace Academy
 			//for (int c = 0; c < tables[i].ColumnCount-1; c++) tables[i].Columns[c].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 			tables[i].Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             tables[i].Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            LoadComboBoxFromBase(cbGroupsDirection, "Directions");
+            LoadComboBoxFromBase(cbStudentsGroup, "Groups");
+            LoadComboBoxFromBase(cbStudentsDiwection, "Directions");
         }
 
 
@@ -131,6 +132,168 @@ namespace Academy
 				(cbStudentsDiwection.SelectedIndex == 0 ? "" : $" direction={cbStudentsDiwection.SelectedValue}")
 			);
             toolStripStatusLabel.Text = $"Количество записей: {tables[0].RowCount - 1}";
+        }
+
+
+        private void tbAddStudents_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && tbAddStudents.Text != "")
+            {
+                string[] strings = tbAddStudents.Text.Split(' ');
+
+                string firstName = "";
+                string middleName = "";
+                string lastName = "";
+                string birthDate = "";
+                string group = "";
+
+                for (int i = 0; i < strings.Length; i++)
+                {
+                    switch (i)
+                    {
+                        case 0:
+                            lastName = strings[i];
+                            break;
+                        case 1:
+                            firstName = strings[i];
+                            break;
+                        case 2:
+                            if (strings[2].ToString() != "-")
+                                middleName = strings[i];
+                            else
+                                middleName = "";
+                            break;
+                        case 3:
+                            birthDate = strings[i];
+                            break;
+                        case 4:
+                            if (strings[4].ToString() != "-")
+                                group = strings[i];
+                            else
+                                group = "";
+                            break;
+                    }
+                }
+                //try
+                //{
+                    Console.WriteLine("Попытка конвертировать дату");
+                    DateTime dtBirthDate = DateTime.Parse(birthDate);
+                    string groupId = "";
+                    if (group != "")
+                    {
+                        Console.WriteLine($"Поиск группы {group}");
+                        DataTable tb = connector.Load("group_id", "Groups", $"group_name = '{group}'");
+                        if (tb.Rows.Count == 0)
+                        {
+                            MessageBox.Show("Не удалось найти группу");
+                            Console.WriteLine($"Не удалось найти группу {group}");
+                        }
+                        groupId = tb.Rows[0]["group_id"].ToString();
+                        
+                        
+                        connector.Insert
+                        (
+                            $"INSERT INTO Students " +
+                            $"(last_name, first_name, middle_name, birth_date, [group]) " +
+                            $"VALUES ('{lastName}', '{firstName}', '{middleName}', '{dtBirthDate}', '{groupId}') "
+                        );
+                    }
+                    else
+                    {
+
+                        connector.Insert
+                        (
+                            $"INSERT INTO Students " +
+                            $"(last_name, first_name, middle_name, birth_date) " +
+                            $"VALUES ('{lastName}', '{firstName}', '{middleName}', '{dtBirthDate}') "
+                        );
+                    }
+                    Console.WriteLine("Попытка вставить");
+                    /*connector.Insert
+                    (
+                        $"INSERT INTO Students " +
+                        (group != "" ? $"(last_name, first_name, middle_name, birth_date, group_id) " : $"(last_name, first_name, middle_name, birth_date) ") +
+                        (group != "" ? $"VALUES ('{lastName}', '{firstName}', '{middleName}', '{dtBirthDate}', '{groupId}') " : $"VALUES ('{lastName}', '{firstName}', '{middleName}', '{dtBirthDate}') ")
+                    );*/
+                //connector.Insert("Students", "(last_name, first_name, middle_name, birth_date, group)", tbAddStudents.Text);
+                tbAddStudents.Clear();
+                    MessageBox.Show($"Всё получилось!\n Имя: {firstName}\n Фамилия: {lastName}\n Очество: {middleName}\n Дата Рождения: {birthDate}\n Группа: {group}");
+                /*}
+                catch
+                {
+                    MessageBox.Show($"Не удалось добавить пользователя\nВозможно, дело в форматирование. Пиши без запятых, разделяя значения пробелами. Если очество или группа отсуствует, то напишите \"-\". Пример:\n Иванович Иван Иванов 01.01.1999 П_421\n Вы написали: \n Имя: {firstName}\n Фамилия: {lastName}\n Очество: {middleName}\n Дата Рождения: {birthDate}\n Группа: {group}");
+                }*/
+
+                tbAddStudents.Clear();
+            }
+            /*
+            else
+            {
+                tbAddStudents.Clear();
+                tbAddStudents.Text = "Добавить студента (ФИО, дата рождения, группа, без запятых через пробел)";
+            }*/
+        }
+
+        private void tbAddTeacher_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && tbAddTeacher.Text != "")
+            {
+                string[] strings = tbAddTeacher.Text.Split(' ');
+
+                string firstName = "";
+                string middleName = "";
+                string lastName = "";
+                string birthDate = "";
+
+                for (int i = 0; i < strings.Length; i++)
+                {
+                    switch (i)
+                    {
+                        case 0:
+                            lastName = strings[i];
+                            break;
+                        case 1:
+                            firstName = strings[i];
+                            break;
+                        case 2:
+                            if (strings[2].ToString() != "-")
+                                middleName = strings[i];
+                            else
+                                middleName = "";
+                            break;
+                        case 3:
+                            birthDate = strings[i];
+                            break;
+                    }
+                }
+                //try
+                //{
+                Console.WriteLine("Попытка конвертировать дату");
+                DateTime dtBirthDate = DateTime.Parse(birthDate);
+
+                connector.Insert
+                (
+                        $"INSERT INTO Teachers " +
+                        $"(last_name, first_name, middle_name, birth_date) " +
+                        $"VALUES ('{lastName}', '{firstName}', '{middleName}', '{dtBirthDate}') "
+                );
+                Console.WriteLine("Попытка вставить");
+                tbAddStudents.Clear();
+                MessageBox.Show($"Всё получилось!\n Имя: {firstName}\n Фамилия: {lastName}\n Очество: {middleName}\n Дата Рождения: {birthDate}");
+                /*}
+                catch
+                {
+                    MessageBox.Show($"Не удалось добавить пользователя\nВозможно, дело в форматирование. Пиши без запятых, разделяя значения пробелами. Если очество или группа отсуствует, то напишите \"-\". Пример:\n Иванович Иван Иванов 01.01.1999 П_421\n Вы написали: \n Имя: {firstName}\n Фамилия: {lastName}\n Очество: {middleName}\n Дата Рождения: {birthDate}\n Группа: {group}");
+                }*/
+
+                tbAddStudents.Clear();
+            }
+            /*
+            else
+            {
+                tbAddStudents.Clear();
+                tbAddStudents.Text = "Добавить студента (ФИО, дата рождения, группа, без запятых через пробел)";
+            }*/
         }
     }
 }

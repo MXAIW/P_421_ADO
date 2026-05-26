@@ -33,6 +33,7 @@
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPageStudents = new System.Windows.Forms.TabPage();
+            this.tbAddStudents = new System.Windows.Forms.TextBox();
             this.cbStudentsDiwection = new System.Windows.Forms.ComboBox();
             this.cbStudentsGroup = new System.Windows.Forms.ComboBox();
             this.dgvStudents = new System.Windows.Forms.DataGridView();
@@ -45,6 +46,7 @@
             this.dgvDisciplines = new System.Windows.Forms.DataGridView();
             this.tabPageTeachers = new System.Windows.Forms.TabPage();
             this.dgvTeachers = new System.Windows.Forms.DataGridView();
+            this.tbAddTeacher = new System.Windows.Forms.TextBox();
             this.statusStrip.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabPageStudents.SuspendLayout();
@@ -92,6 +94,7 @@
             // 
             // tabPageStudents
             // 
+            this.tabPageStudents.Controls.Add(this.tbAddStudents);
             this.tabPageStudents.Controls.Add(this.cbStudentsDiwection);
             this.tabPageStudents.Controls.Add(this.cbStudentsGroup);
             this.tabPageStudents.Controls.Add(this.dgvStudents);
@@ -102,6 +105,18 @@
             this.tabPageStudents.TabIndex = 0;
             this.tabPageStudents.Text = "Students";
             this.tabPageStudents.UseVisualStyleBackColor = true;
+            // 
+            // tbAddStudents
+            // 
+            this.tbAddStudents.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbAddStudents.Location = new System.Drawing.Point(480, 7);
+            this.tbAddStudents.Name = "tbAddStudents";
+            this.tbAddStudents.Size = new System.Drawing.Size(250, 20);
+            this.tbAddStudents.TabIndex = 3;
+            this.tbAddStudents.Text = "Добавить студента";
+            this.tbAddStudents.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbAddStudents_KeyDown);
             // 
             // cbStudentsDiwection
             // 
@@ -217,6 +232,7 @@
             // 
             // tabPageTeachers
             // 
+            this.tabPageTeachers.Controls.Add(this.tbAddTeacher);
             this.tabPageTeachers.Controls.Add(this.dgvTeachers);
             this.tabPageTeachers.Location = new System.Drawing.Point(4, 22);
             this.tabPageTeachers.Name = "tabPageTeachers";
@@ -238,6 +254,18 @@
             this.dgvTeachers.Size = new System.Drawing.Size(738, 319);
             this.dgvTeachers.TabIndex = 0;
             // 
+            // tbAddTeacher
+            // 
+            this.tbAddTeacher.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbAddTeacher.Location = new System.Drawing.Point(542, 6);
+            this.tbAddTeacher.Name = "tbAddTeacher";
+            this.tbAddTeacher.Size = new System.Drawing.Size(188, 20);
+            this.tbAddTeacher.TabIndex = 1;
+            this.tbAddTeacher.Text = "Добавить Преподавателя";
+            this.tbAddTeacher.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbAddTeacher_KeyDown);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -252,6 +280,7 @@
             this.statusStrip.PerformLayout();
             this.tabControl.ResumeLayout(false);
             this.tabPageStudents.ResumeLayout(false);
+            this.tabPageStudents.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStudents)).EndInit();
             this.tabPageGroups.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvGroups)).EndInit();
@@ -260,6 +289,7 @@
             this.tabPageDisciplines.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDisciplines)).EndInit();
             this.tabPageTeachers.ResumeLayout(false);
+            this.tabPageTeachers.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTeachers)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -284,6 +314,8 @@
         private System.Windows.Forms.ComboBox cbGroupsDirection;
         private System.Windows.Forms.ComboBox cbStudentsDiwection;
         private System.Windows.Forms.ComboBox cbStudentsGroup;
+        private System.Windows.Forms.TextBox tbAddStudents;
+        private System.Windows.Forms.TextBox tbAddTeacher;
     }
 }
 
