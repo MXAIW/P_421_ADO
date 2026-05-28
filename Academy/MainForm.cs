@@ -56,13 +56,13 @@ namespace Academy
 			/////////////////////////////
 
 			//cbGroupsDirection.SelectedIndex = 0;
-			LoadComboBoxFromBase(cbGroupsDirection, "Directions");
-			LoadComboBoxFromBase(cbStudentsGroup, "Groups");
-            LoadComboBoxFromBase(cbStudentsDiwection, "Directions");
+			DataBase.LoadComboBoxFromBase(cbGroupsDirection, "Directions");
+            DataBase.LoadComboBoxFromBase(cbStudentsGroup, "Groups");
+            DataBase.LoadComboBoxFromBase(cbStudentsDiwection, "Directions");
         }
 		[DllImport("kernel32.dll")]
 		public static extern bool AllocConsole();
-		void LoadComboBoxFromBase(ComboBox comboBox, string table, string condition = "")
+		/*void LoadComboBoxFromBase(ComboBox comboBox, string table, string condition = "")
         {
             string column = table.Substring(0, table.Length - 1).ToLower();
 			string cmd = $"SELECT {column}_id,{column}_name FROM {table}";
@@ -76,7 +76,7 @@ namespace Academy
             comboBox.DataSource = dt;
             comboBox.DisplayMember = $"{column}_name";
             comboBox.ValueMember = $"{column}_id";
-        }
+        }*/
 
 		private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
 		{
@@ -124,10 +124,10 @@ namespace Academy
 				queries[0] +
 				(cbStudentsDiwection.SelectedIndex == 0 ? "" : $" AND direction={cbStudentsDiwection.SelectedValue}")
 			);
-			LoadComboBoxFromBase
+			DataBase.LoadComboBoxFromBase
 			(
-				cbStudentsGroup, 
-				"Groups", 
+				cbStudentsGroup,
+                "Groups", 
 				(cbStudentsDiwection.SelectedIndex == 0 ? "" : $" direction={cbStudentsDiwection.SelectedValue}")
 			);
             toolStripStatusLabel.Text = $"Количество записей: {tables[0].RowCount - 1}";
