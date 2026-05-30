@@ -210,9 +210,8 @@
             this.labelID.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F);
             this.labelID.Location = new System.Drawing.Point(12, 417);
             this.labelID.Name = "labelID";
-            this.labelID.Size = new System.Drawing.Size(20, 24);
+            this.labelID.Size = new System.Drawing.Size(0, 24);
             this.labelID.TabIndex = 15;
-            this.labelID.Text = "  ";
             // 
             // HumanForm
             // 

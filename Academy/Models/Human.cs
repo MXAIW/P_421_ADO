@@ -27,6 +27,7 @@ namespace Academy.Models
             this.id = id;
             this.last_name = last_name;
             this.first_name = first_name;
+            this.middle_name = middle_name;
             this.birth_date = birth_date;
             this.email = email;
             this.phone = phone;
@@ -52,7 +53,7 @@ namespace Academy.Models
 
         public virtual string Getvalues()
         {
-            return $"N'{last_name}',N'{first_name}',N'{middle_name}',N'{email}',N'{phone}'";
+            return $"N'{last_name}',N'{first_name}',N'{middle_name}',N'{birth_date}',N'{email}',N'{phone}'";
         }
     }
 }

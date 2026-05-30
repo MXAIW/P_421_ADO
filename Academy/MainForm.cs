@@ -53,10 +53,10 @@ namespace Academy
 			
 			tabControl.SelectedIndex = 0;
             tabControl_SelectedIndexChanged(tabControl, null);
-			/////////////////////////////
+            /////////////////////////////
 
-			//cbGroupsDirection.SelectedIndex = 0;
-			DataBase.LoadComboBoxFromBase(cbGroupsDirection, "Directions");
+            //cbGroupsDirection.SelectedIndex = 0;
+            DataBase.LoadComboBoxFromBase(cbGroupsDirection, "Directions");
             DataBase.LoadComboBoxFromBase(cbStudentsGroup, "Groups");
             DataBase.LoadComboBoxFromBase(cbStudentsDiwection, "Directions");
         }
@@ -136,7 +136,8 @@ namespace Academy
         private void btnAddStudents_Click(object sender, EventArgs e)
         {
 			StudentForm studentForm = new StudentForm();
-            studentForm.ShowDialog();
+			if (studentForm.ShowDialog() == DialogResult.OK)
+				tabControl_SelectedIndexChanged(tabControl, null);
         }
     }
 }

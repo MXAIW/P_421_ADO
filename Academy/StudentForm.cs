@@ -24,9 +24,16 @@ namespace Academy
 
         protected override void btnOK_Click(object sender, EventArgs e)
         {
-            base.btnOK_Click(sender, e);
-            student = new Models.Student(human, (int)cbGroup.SelectedValue);
-            DataBase.Connector.Insert($"INSERT Students({student.GetNames()}) VALUES({student.Getvalues()})");
+            if (cbGroup.SelectedIndex != 0)
+            {
+                base.btnOK_Click(sender, e);
+                student = new Models.Student(human, (int)cbGroup.SelectedValue);
+                DataBase.Connector.Insert($"INSERT Students({student.GetNames()}) VALUES({student.Getvalues()})");
+            }
+            else
+            {
+                MessageBox.Show("Один из важных компонентов пуст или группа была не выбрана.");
+            }
         }
     }
 }

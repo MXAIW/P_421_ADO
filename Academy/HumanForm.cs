@@ -37,7 +37,15 @@ namespace Academy
 
         protected virtual void btnOK_Click(object sender, EventArgs e)
         {
-            Compress();
+            if (tbLastName.Text != "" && tbFirstName.Text != "" && dtpBirthDate.Value.ToString("yyyy-MM-dd") != DateTime.Today.ToString("yyyy-MM-dd"))
+            {
+                Compress();
+                MessageBox.Show($"Всё получилось");
+            }
+            else
+            {
+                MessageBox.Show($"Один из важных компонентов пуст.");
+            }
         }
     }
 }
