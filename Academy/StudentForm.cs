@@ -28,9 +28,11 @@ namespace Academy
             {
                 base.btnOK_Click(sender, e);
                 student = new Models.Student(human, (int)cbGroup.SelectedValue);
-                DataBase.Connector.Scalar
-                    (
-                    $"INSERT Students({student.GetNames()}) VALUES({student.Getvalues()});SELECT SCOPE_IDENTIFY();"
+                student.id = Convert.ToInt32(
+                    DataBase.Connector.Scalar
+                        (
+                        $"INSERT Students({student.GetNames()}) VALUES({student.Getvalues()});SELECT SCOPE_IDENTITY();" //Возращает ID последней созданной записи 
+                        )
                     );
                 if (pictureBoxPhoto.Image != null)
                 {
