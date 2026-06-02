@@ -34,7 +34,7 @@ namespace Academy
 			),
 			new Query("*", "Directions"),
             new Query("*", "Disciplines"),
-            new Query("*", "Teacher"),
+            new Query("*", "Teachers"),
         };
 		public MainForm()
 		{
@@ -138,6 +138,13 @@ namespace Academy
 			StudentForm studentForm = new StudentForm();
 			if (studentForm.ShowDialog() == DialogResult.OK)
 				tabControl_SelectedIndexChanged(tabControl, null);
+        }
+
+        private void btnAddTeacher_Click(object sender, EventArgs e)
+        {
+            TeacherForm teacherForm = new TeacherForm();
+            if (teacherForm.ShowDialog() == DialogResult.OK)
+                tabControl_SelectedIndexChanged(tabControl, null);
         }
     }
 }
