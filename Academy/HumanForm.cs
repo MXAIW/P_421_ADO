@@ -47,5 +47,11 @@ namespace Academy
                 MessageBox.Show($"Один из важных компонентов пуст.");
             }
         }
+
+        private void pictureBoxPhoto_MouseHover(object sender, EventArgs e)
+        {
+            ToolTip tt = new ToolTip();
+            tt.SetToolTip(pictureBoxPhoto, "Для выбора фото сделайте двойной щелчок мышью");
+        }
     }
 }
