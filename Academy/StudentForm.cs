@@ -48,11 +48,15 @@ namespace Academy
                         $"INSERT Students({student.GetNames()}) VALUES({student.Getvalues()});SELECT SCOPE_IDENTITY();" //Возращает ID последней созданной записи 
                         )
                     );
-                else DataBase.Connector.Update("Students", student.GetUpdateExpression(), $"stud_id={student.id}");
+                else DataBase.Connector.Update
+                        (
+                    "Students", 
+                    student.GetUpdateExpression(), 
+                    $"stud_id={student.id}"
+                    );
                 if (pictureBoxPhoto.Image != null)
-                {
                     DataBase.Connector.UploadPhoto(student.SerializePhoto(), student.id, "photo", "Students");
-                }
+                
             }
             else
             {
