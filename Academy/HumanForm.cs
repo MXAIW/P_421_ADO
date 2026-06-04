@@ -37,6 +37,18 @@ namespace Academy
                 );
         }
 
+        protected virtual void Exctract()
+        {
+            this.labelID.Text           = $"ID:{human.id}";
+            this.tbLastName.Text        = human.last_name;
+            this.tbFirstName.Text       = human.first_name;
+            this.tbMiddleName.Text      = human.middle_name;
+            this.dtpBirthDate.Value     = Convert.ToDateTime(human.birth_date);
+            this.tbEmail.Text           = human.email;
+            this.tbPhone.Text           = human.phone;
+            this.pictureBoxPhoto.Image  = human.photo;
+        }
+
         protected virtual void btnOK_Click(object sender, EventArgs e)
         {
             if (tbLastName.Text != "" && tbFirstName.Text != "" && dtpBirthDate.Value.ToString("yyyy-MM-dd") != DateTime.Today.ToString("yyyy-MM-dd"))

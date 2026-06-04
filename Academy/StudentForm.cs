@@ -26,7 +26,14 @@ namespace Academy
         public StudentForm(int id) : this() //:this - делегирует (вызывает) конструктор по умолчанию
         {
             DataTable data = DataBase.Connector.Load("*", "Students", $"stud_id={id}");
+            human = student = new Models.Student(data.Rows[0].ItemArray);
+            Exctract();
+        }
 
+        protected override void Exctract()
+        {
+            base.Exctract();
+            cbGroup.SelectedValue = student.group;
         }
 
         protected override void btnOK_Click(object sender, EventArgs e)
