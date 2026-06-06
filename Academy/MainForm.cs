@@ -34,7 +34,7 @@ namespace Academy
 			),
 			new Query("*", "Directions"),
             new Query("*", "Disciplines"),
-            new Query("*", "Teacher"),
+            new Query("*", "Teachers"),
         };
 		public MainForm()
 		{
@@ -141,6 +141,17 @@ namespace Academy
 				tabControl_SelectedIndexChanged(tabControl, null);
 				dgvStudents.Rows[dgvStudents.RowCount - 1].Selected = true;
 				dgvStudents.FirstDisplayedScrollingRowIndex = dgvStudents.RowCount - 1;
+			}
+        }
+
+        private void btnAddTeacher_Click(object sender, EventArgs e)
+        {
+			TeacherForm teacherForm = new TeacherForm();
+			if (teacherForm.ShowDialog() == DialogResult.OK)
+			{
+				tabControl_SelectedIndexChanged(tabControl, null);
+				dgvTeachers.Rows[dgvTeachers.RowCount - 1].Selected = true;
+				dgvTeachers.FirstDisplayedScrollingRowIndex = dgvTeachers.RowCount - 1;
 			}
         }
 
