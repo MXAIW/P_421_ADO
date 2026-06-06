@@ -71,6 +71,7 @@ namespace Academy
         private void pictureBoxPhoto_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "All files|*.*|BMP Files|*.bmp|PNG files|*.png|JPG files|*.jpg;*jpeg|All image files|*.bmp;*.png;*.jpg;*.jpeg;*.svg;*.jfif;*.webp";
             if (dialog.ShowDialog() == DialogResult.OK )
                 pictureBoxPhoto.Image = Image.FromFile(dialog.FileName);
         }
