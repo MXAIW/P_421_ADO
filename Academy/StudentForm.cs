@@ -29,12 +29,12 @@ namespace Academy
             DataTable data = DataBase.Connector.Load("*", "Students", $"stud_id={id}");
             this.Text = "Редактирование студента";
             human = student = new Models.Student(data.Rows[0].ItemArray);
-            Exctract();
+            Extract();
         }
 
-        protected override void Exctract()
+        protected override void Extract()
         {
-            base.Exctract();
+            base.Extract();
             cbGroup.SelectedValue = student.group;
         }
 

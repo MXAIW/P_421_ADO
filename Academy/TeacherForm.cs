@@ -28,9 +28,17 @@ namespace Academy
             teacher.rate = mtbRate.Text;
         }*/
 
-        protected override void Exctract()
+        public TeacherForm(int id) : this() //:this - делегирует (вызывает) конструктор по умолчанию
         {
-            base.Exctract();
+            DataTable data = DataBase.Connector.Load("*", "Teachers", $"teacher_id={id}");
+            this.Text = "Редактирование преподавателя";
+            human = teacher = new Models.Teacher(data.Rows[0].ItemArray);
+            Extract();
+        }
+
+        protected override void Extract()
+        {
+            base.Extract();
             dtpWorkSince.Value = Convert.ToDateTime(teacher.work_since);
             mtbRate.Text = teacher.rate;
         }

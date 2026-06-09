@@ -37,7 +37,7 @@ namespace Academy
                 );
         }
 
-        protected virtual void Exctract()
+        protected virtual void Extract()
         {
             this.labelID.Text           = $"ID:{human.id}";
             this.tbLastName.Text        = human.last_name;
